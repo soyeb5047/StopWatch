@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Babylonica&family=Dancing+Script&family=Josefin+Sans:ital@1&family=Lato:wght@400;700&family=Poppins:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        html {
+            font-size: 100%;
+        }
+
+        @media(max-width:2900px) {
+            html {
+                font-size: 100%;
+            }
+        }
+
+        @media(max-width:1416px) {
+            html {
+                font-size: 70%;
+            }
+        }
+
+        @media(max-width:988px) {
+            html {
+                font-size: 55%;
+            }
+        }
+
+        @media(max-width:768px) {
+            html {
+                font-size: 45%;
+            }
+        }
+
+        @media(max-width:640px) {
+            html {
+                font-size: 35%;
+            }
+        }
+        body
+        {
+            background-color: azure;
+            font-family: 'Poppins', sans-serif;
+        }
+        #container
+        {
+            padding: .625rem;
+            margin-left: auto;
+            margin-right: auto;
+            height: 31.25rem;
+            width: 50%;
+            background: violet;
+            border: .125rem solid ;
+            border-radius: .625rem;
+
+            box-shadow: .06rem .06rem 1.25rem 0 rgb(106, 98, 98);
+
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        #innerDiv
+        {
+            margin-left: auto;
+            margin-right: auto;
+            /* border: 2px solid; */
+            height: 12.5rem;
+            width: 31.25rem;
+            padding: .625rem;
+            margin-bottom: 1.25rem;
+
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+        .spn
+        {
+            font-size: 5rem;
+            color: antiquewhite;
+        }
+        .btn
+        {
+            width: 6.25rem;
+            height: 2.5rem;
+            border-top-right-radius: .3125rem;
+            border-bottom-left-radius: .3125rem;
+            /* margin-left: auto;
+            margin-right: auto; */
+            padding: .625rem;
+
+        }
+        #btn1
+        {
+            background-color: red;
+            box-shadow: .125rem .125rem rgb(85, 81, 81);
+
+        }
+        #btn2
+        {
+            background-color: blueviolet;
+            box-shadow: .125rem .125rem rgb(85, 81, 81);
+        }
+        #btn3
+        {
+            background-color: rgb(30, 138, 192);
+            box-shadow: .125rem .125rem rgb(85, 81, 81);
+        }
+
+        #btn4
+        {
+            background-color: rgb(243, 191, 113);
+            box-shadow: .125rem .125rem rgb(85, 81, 81);
+        }
+
+        #container2
+        {
+            background: rgb(161, 155, 155);
+            height: auto;
+            width: 31.25rem;
+
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 1.87rem;
+
+            border-radius: .3125rem;
+            box-shadow: .06rem .06rem 1.25rem 0 rgb(214, 154, 154);
+
+            color: white;
+
+            padding: 1.25rem;
+
+        }
+        h2
+        {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="innerDiv">
+            <!-- for hour -->
+            <span class="spn" id="span1">00</span>
+            <!-- <p class="spn" id="span1">00</p> -->
+            <span class="spn">:</span>
+            <!-- for minute -->
+            <span class="spn" id="span2">00</span>
+            <span class="spn" >:</span>
+            <!-- for sec -->
+            <span class="spn" id="span3">00</span>
+            
+            
+        </div>
+        <span>
+        <input type="button" value="Start" id="btn1" class="btn">
+        <input type="button" value="Stop" id="btn2" class="btn">
+        <input type="button" value="Reset" id="btn3" class="btn">
+        <input type="button" value="Lap" id="btn4" class="btn">
+    </span>
+    </div>
+
+    <div id="container2"><h2>Laps are -></h2></div>
+
+    <script>
+        var hour = document.getElementById("span1")
+        var min = document.getElementById("span2")
+        var sec = document.getElementById("span3")
+
+        // hour.innerText = 1
+        // console.log(hour.innerText)
+
+        // console.log(sec.innerText) ==> 00
+        // console.log(min.innerText)
+        // console.log(hour.innerText)
+
+
+        var start = document.getElementById("btn1")
+        var stop = document.getElementById("btn2")
+        var reset = document.getElementById("btn3")
+        var lap = document.getElementById("btn4")
+
+        var div2 = document.getElementById("container2")
+
+        // for storing the reference of setInterval
+        var x;
+
+        var count = 0
+        var countMIn = 0
+        var countHou = 0
+
+        start.addEventListener("click", function(){
+            // console.log("click")
+
+           
+
+            x = setInterval(function(){
+                // console.log("hi")
+
+                
+                count++;
+                // console.log(count)
+
+                sec.innerText = count
+
+                if(count > 59)
+                {
+                    countMIn++;
+                    
+                    min.innerText = countMIn
+
+                    count = 0
+                    sec.innerText = count
+                }
+
+                if(countMIn > 59)
+                {
+                    countHou++
+
+                    hour.innerText = countHou
+
+                    count = 0
+                    countMIN = 0
+
+                    sec.innerText = count
+                    min.innerText = countMIn
+                }
+
+            }, 1000)
+        })
+
+        stop.addEventListener("click", function(){
+            clearInterval(x)
+
+            
+        })
+
+        reset.addEventListener("click", function(){
+            count = 0
+            countMIn = 0
+            countHou = 0
+
+            sec.innerText = "00"
+            min.innerText = "00"
+            hour.innerText = "00"
+        })
+
+        var lapCount = 0
+
+        lap.onclick = () => {
+            var div3 = document.createElement("div")
+            var span = document.createElement("span")
+            var span1 = document.createElement("span")
+            var hr = document.createElement("hr")
+            lapCount++
+
+            span.innerText = `${lapCount}. Lap${lapCount}`
+
+            if(count < 9)
+            span1.innerText = `${countHou} : ${countMIn} : 0${count}`
+            else if(count > 9)
+            span1.innerText = `${countHou} : ${countMIn} : ${count}`
+            
+            else if(countMIn < 9)
+            span1.innerText = `${countHou} : 0${countMIn} : ${count}`
+            else if(countMIn > 9)
+            span1.innerText = `${countHou} : ${countMIn} : ${count}`
+            
+            else if(countHou < 9)
+            span1.innerText = `0${countHou} : ${countMIn} : ${count}`
+            else if(countHou > 9)
+            span1.innerText = `0${countHou} : ${countMIn} : ${count}`
+
+            span.style.padding = "5.625rem"
+
+            // console.log(lapCount)
+
+            div3.append(span)
+            div3.append(span1)
+            div3.append(hr)
+            div2.append(div3)
+
+        }
+
+    </script>
+</body>
+</html>
